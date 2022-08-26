@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>模拟一个数据监测</title>
+    <!-- 引入 Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //以阻止 vue 在启动时生成生产提示。
+
+
+        let data = {
+            name: '二高',
+            address: '荷兰'
+        }
+
+        //创建一个监视的实例对象，用于监视data中属性的变化
+        const obs = new Observer(data)
+
+        //准备一个vm实例对象
+        let vm = {}
+        vm._data = data = obs
+
+        function Observer(obj) {
+            //汇总对象中所有的属性形成一个数组
+            const keys = Object.keys(obj)
+            //遍历
+            keys.forEach((k) => {
+                Object.defineProperty(this, k, {
+                    get() {
+                        return obj[k]
+                    },
+                    set(val) {
+                        obj[k] = val
+                    }
+                })
+            })
+        }
+
+    </script>
+</body>
+
+</html>
