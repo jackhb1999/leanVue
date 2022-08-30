@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>分析生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!--
+		vm的生命周期：
+            将要创建 ===> 调用beforeCreate函数
+            创建完毕 ===> 调用created函数
+            将要挂载 ===> 调用beforeMount函数
+            挂载完毕 ===> 调用mounted函数 ============>【重要的钩子】
+            将要更新 ===> 调用beforeUpdated函数
+            更新完毕 ===> 调用updated函数
+            将要销毁 ===> 调用beforeDestroy函数 ======>【重要的钩子】
+            销毁完毕 ===> 调用destroyed函数
+	-->
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>当前n的值：{{n}}</h2>
+        <button @click="add">+1</button>
+        <button @click="bye">销毁vm</button>
+    </div>
+
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //以阻止 vue 在启动时生成生产提示。
+
+        //创建 Vue 实例
+        new Vue({
+            el: '#root',
+
+            data: {
+                n: 1
+            },
+            methods: {
+                add() {
+                    this.n++
+                },
+                bye() {
+                    this.$destroy()
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate');
+
+            },
+            created() {
+                console.log('created');
+
+            },
+            beforeMount() {
+                console.log('beforeMount');
+            },
+            // Vue完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mounted
+            mounted() {
+                console.log('mounted');
+                console.log(this);
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate');
+                console.log(this);
+            },
+            updated() {
+                console.log('updated');
+                console.log(this);
+
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy');
+            },
+            destroyed() {
+                console.log('destroyed');
+            },
+        })
+
+    </script>
+</body>
+
+</html>

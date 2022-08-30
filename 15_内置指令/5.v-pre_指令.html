@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>v-pre</title>
+	<!-- 引入 Vue -->
+	<script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+	<!--
+		v-pre指令：
+			1.跳过其所在节点的编译过程。
+			2.可利用它跳过：没有使用指令语法、没有使用插值语法的节点，会加快编译。
+	-->
+
+	<!-- 准备好一个容器 -->
+	<div id="root">
+		<h2 v-pre>Vue eary</h2>
+		<h2 v-pre>当前n的值：{{n}}</h2>
+		<button v-pre @click="n++">+1</button>
+	</div>
+
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false //以阻止 vue 在启动时生成生产提示。
+
+		new Vue({
+			el: '#root',
+			data: {
+				n: 1
+			}
+		})
+	</script>
+</body>
+
+</html>
