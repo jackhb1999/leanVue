@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件嵌套</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!--
+		
+    -->
+
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h2>{{msg}}</h2>
+
+    </div>
+
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //以阻止 vue 在启动时生成生产提示。
+
+        // 创建student组件
+        const student = Vue.extend({
+            template: `
+                    <div>
+                    <h2>学生名称：{{studentName}}</h2>
+                    <h2>学生地址：{{address}}</h2>
+                    </div>
+                    `,
+            data() {
+                return {
+                    studentName: 'jack',
+                    address: '长安'
+                }
+            }
+        })
+
+        // 创建school组件
+        const school = Vue.extend({
+            template: `
+            <div>
+			<h2>学校名称：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            <student></student>
+            </div>
+			`,
+            data() {
+                return {
+                    schoolName: '二高',
+                    address: '西安'
+                }
+            },
+            components: {
+                student
+            }
+        })
+
+        const hello = Vue.extend({
+            template: `<h1>{{msg}}</h1>`,
+            data() {
+                return {
+                    msg: '欢迎使用Vue'
+                }
+            }
+        })
+
+        const app = Vue.extend({
+            template: `
+                <div>
+                    <school></school>
+        <hello></hello>
+        </div>
+            `,
+            components: {
+                school,
+                hello
+            }
+        })
+
+        new Vue({
+            el: '#root',
+            template: `<app></app>`,
+            data: {
+                msg: "学习Vue"
+            },
+            components: {
+                app
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
