@@ -1,18 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-// 引入插件
-import vueResource from 'vue-resource'
+// 引入 VueRouter
+import VueRouter from 'vue-router'
+
+// 引入路由器
+import router from './router/index'
 
 Vue.config.productionTip = false
 
-// 使用插件
-Vue.use(vueResource)
-
+Vue.use(VueRouter)
 
 new Vue({
   render: h => h(App),
-  beforeCreate() {
-  	Vue.prototype.$bus = this
-  }
+  router:router
 }).$mount('#app')
